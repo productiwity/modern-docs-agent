@@ -22,5 +22,5 @@ jobs:
           node-version: 22
       - name: Validate skill package
         run: python3 scripts/validate.py
-      - name: Test installed skill updater
-        run: node scripts/test-silent-update.mjs
+      - name: Test skill installation
+        run: node scripts/test-install.mjs

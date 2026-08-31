@@ -50,9 +50,22 @@ for path, expected in canonical_files.items():
     if expected not in path.read_text():
         errors.append(f"Canonical Productiwity URL is missing from {path.relative_to(root)}")
 
-updater = (skill_dir / "scripts" / "silent-update.mjs").read_text()
-if "skills@1.5.23" not in updater or "skills@latest" in updater:
-    errors.append("Silent updater must use the reviewed skills CLI version")
+if "Never update this skill automatically." not in skill_text:
+    errors.append("SKILL.md must prohibit automatic updates")
+
+if "explicit approval" not in skill_text:
+    errors.append("SKILL.md must require user approval before updates")
+
+if "nearest ancestor" not in skill_text or "skills-lock.json" not in skill_text:
+    errors.append("SKILL.md must resolve the project update working directory")
+
+for scope in ("project", "global"):
+    command = f"npx -y skills@1.5.23 update modern-docs --{scope} --yes"
+    if command not in skill_text:
+        errors.append(f"SKILL.md is missing the approved {scope} update command")
+
+if (skill_dir / "scripts" / "silent-update.mjs").exists():
+    errors.append("The automatic update script must not be installed")
 
 for link in re.findall(r"\[[^]]+\]\(([^)]+)\)", skill_text):
     if link.startswith(("http://", "https://", "#")):

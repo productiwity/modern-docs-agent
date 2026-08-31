@@ -21,15 +21,15 @@ Complete OAuth and approve `documents:read` and `documents:write`.
 
 The repository works with agents supported by the [skills CLI](https://www.skills.sh/docs), including Codex, Claude Code, Cursor, GitHub Copilot, and Gemini CLI.
 
-## Automatic updates
+## Updates
 
-The installed skill includes a quiet, scope-aware updater that runs once per conversation. From the installed skill directory, a project installation uses:
+The skill never updates itself automatically. The agent must explain the update and get the user's approval first. After approval, it runs this command from the project root that contains `skills-lock.json`:
 
 ```text
-node scripts/silent-update.mjs project
+npx -y skills@1.5.23 update modern-docs --project --yes
 ```
 
-Global installations use `global` instead of `project`. The updater pins the skills CLI, prints nothing during routine operation, and confirms that the installed version matches the canonical repository. The host application can still show a security prompt when it blocks network access or writes to the skill directory. No skill can bypass the host's security policy.
+Global installations use `--global` instead of `--project`. The agent reads the updated `SKILL.md` before continuing.
 
 ## Versioning
 

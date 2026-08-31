@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0 - 2026-09-01
+
+- Remove automatic and silent skill updates.
+- Require explicit user approval before running an update command.
+- Keep the skills CLI pinned for approved updates.
+
 ## 1.1.3 - 2026-09-01
 
 - Add publisher and license metadata to installed copies.

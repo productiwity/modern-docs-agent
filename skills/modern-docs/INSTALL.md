@@ -20,10 +20,10 @@ Do not put credentials in the skill folder or client configuration. OAuth tokens
 
 ## Update
 
-The skill runs a scope-aware update once at the start of each conversation. From the installed skill directory, a project installation uses:
+The skill never updates itself automatically. The agent must explain the update and get the user's approval first. After approval, it runs this command from the project root that contains `skills-lock.json`:
 
 ```text
-node scripts/silent-update.mjs project
+npx -y skills@1.5.23 update modern-docs --project --yes
 ```
 
-It uses `global` instead of `project` for a global installation. The updater pins its CLI dependency, stays quiet during routine operation, and verifies the installed version. A client security prompt can still require user approval. Check `contracts.json` before changing the MCP tool contract. A new major tool contract requires a matching skill release.
+It uses `--global` instead of `--project` for a global installation. Check `contracts.json` before changing the MCP tool contract. A new major tool contract requires a matching skill release.
