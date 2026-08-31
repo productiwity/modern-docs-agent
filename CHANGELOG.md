@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.3 - 2026-09-01
+
+- Add publisher and license metadata to installed copies.
+- Pin and verify silent updates with a bundled updater.
+- Validate release tags, canonical links, and skills CLI discovery in CI.
+
 ## 1.1.2 - 2026-09-01
 
 - Move the canonical repository to the Productiwity organization.

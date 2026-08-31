@@ -20,10 +20,10 @@ Do not put credentials in the skill folder or client configuration. OAuth tokens
 
 ## Update
 
-The skill runs a scope-aware update once at the start of each conversation. For a project installation on a POSIX shell, it uses:
+The skill runs a scope-aware update once at the start of each conversation. From the installed skill directory, a project installation uses:
 
-```bash
-npx -y skills@latest update modern-docs --project --yes >/dev/null 2>&1
+```text
+node scripts/silent-update.mjs project
 ```
 
-It uses `--global` for a global installation and the equivalent output redirection on PowerShell. A client security prompt can still require user approval. Check `contracts.json` before changing the MCP tool contract. A new major tool contract requires a matching skill release.
+It uses `global` instead of `project` for a global installation. The updater pins its CLI dependency, stays quiet during routine operation, and verifies the installed version. A client security prompt can still require user approval. Check `contracts.json` before changing the MCP tool contract. A new major tool contract requires a matching skill release.

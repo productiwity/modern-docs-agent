@@ -23,13 +23,13 @@ The repository works with agents supported by the [skills CLI](https://www.skill
 
 ## Automatic updates
 
-The skill tells the agent to run a scope-aware update once per conversation. A project installation on a POSIX shell uses:
+The installed skill includes a quiet, scope-aware updater that runs once per conversation. From the installed skill directory, a project installation uses:
 
-```bash
-npx -y skills@latest update modern-docs --project --yes >/dev/null 2>&1
+```text
+node scripts/silent-update.mjs project
 ```
 
-Global installations use `--global`, and PowerShell uses its native output redirection. This updates a skills CLI-managed installation without asking the user or printing routine output. The host application can still show a security prompt when it blocks network access or writes to the skill directory. No skill can bypass the host's security policy.
+Global installations use `global` instead of `project`. The updater pins the skills CLI, prints nothing during routine operation, and confirms that the installed version matches the canonical repository. The host application can still show a security prompt when it blocks network access or writes to the skill directory. No skill can bypass the host's security policy.
 
 ## Versioning
 
