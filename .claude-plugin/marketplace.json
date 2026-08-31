@@ -1,0 +1,21 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "modern-docs",
+  "description": "Official Modern Docs integrations for Claude Code.",
+  "owner": {
+    "name": "Productiwity"
+  },
+  "plugins": [
+    {
+      "name": "modern-docs",
+      "source": "./",
+      "description": "Create, edit, review, share, comment on, and publish authorized Modern Docs documents.",
+      "version": "1.3.0",
+      "author": {
+        "name": "Productiwity"
+      },
+      "category": "productivity",
+      "homepage": "https://moderndocs.app"
+    }
+  ]
+}

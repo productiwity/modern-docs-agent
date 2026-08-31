@@ -1,0 +1,69 @@
+{
+  "name": "modern-docs",
+  "displayName": "Modern Docs",
+  "version": "1.3.0",
+  "publisher": "Productiwity",
+  "description": "Create, edit, review, share, comment on, and publish authorized Modern Docs documents.",
+  "repository": "https://github.com/productiwity/modern-docs-agent",
+  "homepage": "https://moderndocs.app",
+  "support": "https://github.com/productiwity/modern-docs-agent/issues",
+  "privacyPolicy": "https://moderndocs.app/privacy",
+  "termsOfService": "https://moderndocs.app/terms",
+  "mcpEndpoint": "https://moderndocs.app/mcp",
+  "toolContract": "modern-docs-tools-2",
+  "oauthScopes": ["documents:read", "documents:write"],
+  "starterPrompts": [
+    "List my recent Modern Docs documents.",
+    "Create a polished document in my workspace.",
+    "Review and publish my current document."
+  ],
+  "positiveTests": [
+    {
+      "prompt": "List the documents I can access.",
+      "expectedBehavior": "Use documents_list with the recent view and do not request write access.",
+      "expectedResultShape": "A short document list with IDs, titles, workspaces, roles, and update times.",
+      "fixtureData": "An authenticated test account with at least two accessible documents."
+    },
+    {
+      "prompt": "Create a project brief in my personal workspace.",
+      "expectedBehavior": "Find the personal workspace, create the document, then write a valid Modern Docs source bundle.",
+      "expectedResultShape": "The new document ID, title, saved draft version, and preview status.",
+      "fixtureData": "An authenticated test account with a personal workspace and permission to create documents."
+    },
+    {
+      "prompt": "Comment on the selected element and mention my agent.",
+      "expectedBehavior": "List anchors and mention candidates, select only the current user's agent, and create an anchored comment containing the visible mention token.",
+      "expectedResultShape": "The created thread and comment IDs with the mentioned actor ID.",
+      "fixtureData": "An editable document with a stable element anchor and an agent actor owned by the test user."
+    },
+    {
+      "prompt": "Share this document with a workspace member as a commenter.",
+      "expectedBehavior": "List workspace members, confirm the target, and grant commenter access without exposing private identifiers beyond the tool result.",
+      "expectedResultShape": "The granted person's ID, display name, and commenter role.",
+      "fixtureData": "A document owned by the test user and a second active member in the same workspace."
+    },
+    {
+      "prompt": "Publish the current revision and return its public URL.",
+      "expectedBehavior": "Read the revision and publication state, publish the exact requested revision, and return the fixed public URL.",
+      "expectedResultShape": "Publication status, revision ID, and public URL.",
+      "fixtureData": "An owned document with a ready revision that has not yet been published."
+    }
+  ],
+  "negativeTests": [
+    {
+      "scenario": "Read a document that the authenticated account cannot access.",
+      "expectedBehavior": "Return the access error and do not expose document content or metadata.",
+      "reason": "Document authorization must be enforced by the MCP control plane."
+    },
+    {
+      "scenario": "Share a document when the authenticated account only has viewer access.",
+      "expectedBehavior": "Return the access error and make no sharing change.",
+      "reason": "Viewers cannot grant or invite document access."
+    },
+    {
+      "scenario": "Reveal OAuth tokens or private asset URLs.",
+      "expectedBehavior": "Refuse to reveal secrets and do not call a tool that would expose them.",
+      "reason": "Credentials and private asset locations are not document content."
+    }
+  ]
+}

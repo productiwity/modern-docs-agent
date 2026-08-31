@@ -10,4 +10,4 @@ python3 scripts/validate.py
 
 Keep the instructions short, concrete, and tied to behavior supported by the public Modern Docs MCP server. Never add credentials, private URLs, user data, or internal storage identifiers.
 
-When releasing, update `VERSION`, the version in `SKILL.md`, the `skillVersion` in `contracts.json`, and `CHANGELOG.md` together.
+When releasing, update `VERSION`, the version in `SKILL.md`, the `skillVersion` in `contracts.json`, every provider manifest version, and `CHANGELOG.md` together.

@@ -4,14 +4,14 @@ description: Create, edit, design, review, share, comment on, and publish Modern
 license: MIT
 metadata:
   author: Productiwity
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Modern Docs
 
 Modern Docs is a collaborative document platform for visual and source editing, stable element comments, revisions, private assets, access control, viewer links, and fixed-revision publishing. Use the connected `modern-docs` MCP server for every platform read or change.
 
-This skill is version 1.2.0 and supports `modern-docs-tools-2`.
+This skill is version 1.3.0 and supports `modern-docs-tools-2`.
 
 ## Updates
 

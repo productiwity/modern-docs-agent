@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "modern-docs",
+  "version": "1.3.0",
+  "description": "Create, edit, review, share, comment on, and publish authorized Modern Docs documents.",
+  "author": {
+    "name": "Productiwity",
+    "url": "https://github.com/productiwity"
+  },
+  "homepage": "https://moderndocs.app",
+  "repository": "https://github.com/productiwity/modern-docs-agent",
+  "license": "MIT",
+  "keywords": ["documents", "collaboration", "publishing", "mcp"]
+}

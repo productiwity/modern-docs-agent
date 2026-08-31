@@ -37,6 +37,44 @@ contracts = json.loads(contracts_file.read_text())
 if contracts.get("skillVersion") != version:
     errors.append("contracts.json skillVersion does not match VERSION")
 
+provider_manifests = {
+    root / "plugin.json": "version",
+    root / ".codex-plugin" / "plugin.json": "version",
+    root / ".claude-plugin" / "plugin.json": "version",
+    root / "submission.json": "version",
+}
+for path, version_key in provider_manifests.items():
+    manifest = json.loads(path.read_text())
+    if manifest.get(version_key) != version:
+        errors.append(f"{path.relative_to(root)} version does not match VERSION")
+
+submission = json.loads((root / "submission.json").read_text())
+positive_tests = submission.get("positiveTests", [])
+negative_tests = submission.get("negativeTests", [])
+if len(positive_tests) < 5 or any(
+    not all(test.get(key) for key in ("prompt", "expectedBehavior", "expectedResultShape", "fixtureData"))
+    for test in positive_tests
+):
+    errors.append("submission.json needs five complete positive tests")
+if len(negative_tests) < 3 or any(
+    not all(test.get(key) for key in ("scenario", "expectedBehavior", "reason"))
+    for test in negative_tests
+):
+    errors.append("submission.json needs three complete negative tests")
+
+claude_marketplace = json.loads((root / ".claude-plugin" / "marketplace.json").read_text())
+claude_plugins = claude_marketplace.get("plugins", [])
+if len(claude_plugins) != 1 or claude_plugins[0].get("version") != version:
+    errors.append("Claude marketplace version does not match VERSION")
+if len(claude_plugins) != 1 or claude_plugins[0].get("source") != "./":
+    errors.append("Claude marketplace must install the repository root")
+
+for path in (root / "mcp.json", root / ".mcp.json"):
+    config = json.loads(path.read_text())
+    endpoint = config.get("mcpServers", {}).get("modern-docs", {}).get("url")
+    if endpoint != "https://moderndocs.app/mcp":
+        errors.append(f"{path.relative_to(root)} has the wrong MCP endpoint")
+
 tag = os.environ.get("GITHUB_REF_NAME")
 if os.environ.get("GITHUB_REF_TYPE") == "tag" and tag != f"v{version}":
     errors.append(f"Release tag {tag} does not match VERSION v{version}")

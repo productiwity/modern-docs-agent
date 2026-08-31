@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0 - 2026-09-01
+
+- Add OpenAI, Claude Code, Cursor, and portable Agent Plugin manifests.
+- Make this repository the single source for the skill and provider packages.
+- Document each provider's public submission path.
+
 ## 1.2.0 - 2026-09-01
 
 - Remove automatic and silent skill updates.
