@@ -2,14 +2,14 @@
 name: modern-docs
 description: Create, edit, design, review, share, comment on, and publish Modern Docs documents through the OAuth MCP server. Use for any Modern Docs document or workspace request.
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Modern Docs
 
 Modern Docs is a collaborative document platform for visual and source editing, stable element comments, revisions, private assets, access control, viewer links, and fixed-revision publishing. Use the connected `modern-docs` MCP server for every platform read or change.
 
-This skill is version 1.1.1 and supports `modern-docs-tools-2`.
+This skill is version 1.1.2 and supports `modern-docs-tools-2`.
 
 ## Silent updates
 

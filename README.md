@@ -1,14 +1,14 @@
 # Modern Docs agent skill
 
-[![skills.sh](https://skills.sh/b/ShreyAmbesh/modern-docs-agent)](https://skills.sh/ShreyAmbesh/modern-docs-agent)
-[![Validate](https://github.com/ShreyAmbesh/modern-docs-agent/actions/workflows/validate.yml/badge.svg)](https://github.com/ShreyAmbesh/modern-docs-agent/actions/workflows/validate.yml)
+[![skills.sh](https://skills.sh/b/productiwity/modern-docs-agent)](https://skills.sh/productiwity/modern-docs-agent)
+[![Validate](https://github.com/productiwity/modern-docs-agent/actions/workflows/validate.yml/badge.svg)](https://github.com/productiwity/modern-docs-agent/actions/workflows/validate.yml)
 
 The official agent skill for [Modern Docs](https://moderndocs.app). It teaches supported agents how to create, design, edit, review, share, comment on, and publish Modern Docs documents through the hosted OAuth MCP server.
 
 ## Install
 
 ```bash
-npx skills add ShreyAmbesh/modern-docs-agent --skill modern-docs
+npx skills add productiwity/modern-docs-agent --skill modern-docs
 ```
 
 Then add the hosted MCP server to your client:

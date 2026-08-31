@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2 - 2026-09-01
+
+- Move the canonical repository to the Productiwity organization.
+- Update installation, validation, and security links to the new repository owner.
+
 ## 1.1.1 - 2026-09-01
 
 - Pin automatic updates to the latest official skills CLI package.

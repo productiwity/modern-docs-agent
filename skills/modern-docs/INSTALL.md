@@ -1,11 +1,11 @@
 # Install the Modern Docs skill
 
-The public source is [`skills/modern-docs`](https://github.com/ShreyAmbesh/modern-docs-agent/tree/main/skills/modern-docs).
+The public source is [`skills/modern-docs`](https://github.com/productiwity/modern-docs-agent/tree/main/skills/modern-docs).
 
 ## Install from skills.sh
 
 ```bash
-npx skills add ShreyAmbesh/modern-docs-agent --skill modern-docs
+npx skills add productiwity/modern-docs-agent --skill modern-docs
 ```
 
 Choose the agent clients where you want to install the skill. Then add this remote MCP server through the client's MCP settings:
