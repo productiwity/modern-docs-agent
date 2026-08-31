@@ -1,0 +1,15 @@
+{
+  "skill": "modern-docs-1",
+  "skillVersion": "1.1.0",
+  "mcpServer": "0.2.0",
+  "toolContract": "modern-docs-tools-2",
+  "protocol": "2026-07-28",
+  "legacyProtocol": "2025-11-25",
+  "sourceProfiles": {
+    "html": "md-html-1",
+    "css": "md-css-2",
+    "javascript": "md-js-2",
+    "settings": "md-settings-1",
+    "svg": "md-svg-1"
+  }
+}
