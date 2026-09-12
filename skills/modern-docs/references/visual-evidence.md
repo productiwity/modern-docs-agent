@@ -64,7 +64,7 @@ Add a diagram only when relationships, sequence, ownership, or flow are harder t
 - Add a caption that explains what to notice.
 - Add useful alt text or a nearby text description.
 
-Modern Docs does not allow inline SVG in document HTML. Create the diagram as an SVG file, upload it with `document_asset`, and place the returned `asset:<asset-id>` reference in an `img` inside a semantic `figure`.
+Modern Docs does not allow inline SVG in document HTML. Create the diagram as an SVG file, upload it with `document_asset_upload`, and place the returned `asset:<asset-id>` reference in an `img` inside a semantic `figure`.
 
 ## Final evidence review
 

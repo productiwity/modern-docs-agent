@@ -10,12 +10,15 @@ OAuth identifies the connected user. The server derives the agent actor and chec
 | --- | --- | --- |
 | `documents_list` | Read | List recent, owned, shared, archived, or trashed documents. Search and paginate results. It also returns accessible workspaces. |
 | `workspace_members_list` | Read | Search and paginate active members of an accessible workspace. Returns stable user IDs, names, emails, avatars, and workspace roles for mentions and direct sharing. |
-| `document_read` | Read | Read one authorized document, including title, role, status, draft version, current revision, and complete canonical source. |
-| `document_create` | Write | Create an empty document in an accessible workspace with a title and operation ID. |
+| `document_read` | Read | Read title, role, status, draft version, current revision and latest draft preview. Set includeSource:false to omit source. Default true includes complete canonical source for editing. |
+| `document_create` | Write | Create an empty document and return its URL and initial draftVersion. |
+| `document_validate` | Read | Check source without saving. Optional documentId checks access and asset ownership. Returns compact diagnostics, not HTML. |
+| `document_ids_generate` | Read | Optionally generate 1-500 ULIDs needed before saving. Normally omit new element IDs and let saving assign them. |
 | `document_update` | Write | Replace the complete source bundle at an exact draft version and build its preview. Set `checkpoint` only when the user wants a revision at the same time. |
 | `document_revision` | Read or write | `list` history, `checkpoint` the current draft with a name, or `restore` an exact revision into a new current draft. |
-| `document_asset` | Read or write | `list` ready assets or `upload` an image or WOFF2 font as base64. Use returned asset IDs in source. |
-| `document_comment` | Read or write | `anchors`, `list`, `mention_candidates`, `create`, `reply`, or `resolve` a stable-element thread. Create and reply accept up to 20 `mentionedActorIds`. |
+| `document_assets_list` | Read | List ready document assets. Returns an items array. |
+| `document_asset_upload` | Write | Upload an image or WOFF2 font using operationId, documentId, name, mediaType and base64. No action field. |
+| `document_comment` | Read or write | `anchors`, `list`, `mention_candidates`, `create`, `edit`, `delete`, `reply`, or `resolve` a stable-element thread. Mention-capable writes accept up to 20 mentionedActorIds. Only the author can edit/delete a comment. Deleting its first comment deletes the thread. |
 | `document_share` | Read or write | `overview`, `invite`, `grant`, `revoke`, `cancel_invitation`, `set_editors_can_share`, `create_viewer_link`, or `revoke_viewer_link`. |
 | `document_publish` | Read or write | Read `status`, `publish` an exact revision after a successful build, or `unpublish`. |
 
@@ -42,7 +45,7 @@ Always read `document_share` overview before changing access. Use `invite` for a
 
 ## Revisions and publishing
 
-A draft is the current editable source. A checkpoint creates an immutable revision. Restore copies a historical revision into a new draft and keeps history unchanged. Publishing requires an exact revision and creates or reuses its build. Read publication status after publishing when the user needs the public URL.
+A draft is the current editable source. A checkpoint creates an immutable revision. Restore copies a historical revision into a new draft and keeps history unchanged; it does not rebuild the preview or alter publication. Publishing requires an exact revision and creates or reuses its build. Read publication status after publishing when the user needs the public URL. Its revision is the public edition, not necessarily the current draft. buildOperationId is a caller-created retry key, not an existing build ID.
 
 ## Assets
 
@@ -52,6 +55,7 @@ List existing assets before upload. Upload only a supported PNG, JPEG, GIF, WebP
 
 - On a draft version conflict, read again, merge with the current source, and use a new operation ID.
 - On validation failure, fix the named source field. Do not weaken the document to bypass the validator.
+- On a quota failure, report it. Do not silently switch workspaces or overwrite another document.
 - On access denial, stop unless the user changes access.
 - On an uncertain transport result, retry the exact same input with the same operation ID.
 - On changed intent or changed input, use a new operation ID.

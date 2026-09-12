@@ -38,11 +38,11 @@ One strong signature element is better than many competing effects. Keep the res
 
 - Use `main`, `header`, `section`, `nav`, `article`, `aside`, `figure`, `blockquote`, lists, tables, and headings for their real meaning.
 - Keep one `h1`, then follow heading levels in order.
-- Put a stable uppercase ULID in `data-md-id` on every element. Preserve an existing ID when its meaning remains the same.
+- Omit `data-md-id` on new elements; the server assigns ULIDs. Preserve existing IDs when their meaning remains the same. The optional `document_ids_generate` tool supplies IDs needed for internal links before saving.
 - Use classes for repeated styles. Keep selectors simple and local to the document.
 - Use real, specific copy. Prefer short sentences, active voice, sentence case, and labels that describe the action.
 - Use numbers, sequence labels, progress, and status only when the source supports them. Decorative structure must not imply false data.
-- Upload real images and fonts through `document_asset`. Never depend on a remote script, stylesheet, font, or image.
+- Upload real images and fonts through `document_asset_upload`. Never depend on a remote script, stylesheet, font, or image.
 
 ## Create hierarchy through contrast
 
@@ -63,7 +63,7 @@ Avoid eyebrow labels, pills, gradients, decorative icons, and card grids unless 
 - Give links and controls visible keyboard focus.
 - Use descriptive link text and image alt text.
 - Do not communicate meaning through color alone.
-- Keep the document useful without motion. Use finite motion only to clarify a state change. The current document CSS grammar does not accept `prefers-reduced-motion`, so do not emit that media query.
+- Keep the document useful without motion. Use finite motion only to clarify a state change. The current CSS grammar accepts `@media(prefers-reduced-motion:reduce)` for reduced-motion overrides.
 - Make tables scroll within their own wrapper on narrow screens.
 - Keep horizontal overflow inside the element that needs it. The document body itself must not scroll sideways.
 
@@ -83,11 +83,11 @@ Do not mix patterns unless the content requires it.
 
 ## Final visual review
 
-Before saving:
+Validate source before saving and check preview status through MCP. The following visual review is optional and may only be performed after explicit user approval for browser testing. Browser availability is not approval:
 
 1. Read the document at desktop, tablet, and mobile widths.
 2. Check the title, first screen, longest heading, longest paragraph, lists, tables, images, and empty states.
 3. Confirm there is no clipped text, accidental overflow, low contrast, or tiny body copy.
 4. Confirm every section earns its space and the signature element fits the subject.
 5. Remove filler copy and one unnecessary decorative choice.
-6. Read the saved document again after `document_update` and fix any validation or composition problem.
+6. Before the next edit, read canonical source to preserve server-generated IDs. A source read alone is not visual verification. If rendering cannot be inspected, disclose that limit.

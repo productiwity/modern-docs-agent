@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.0 - 2026-09-13
+
+- Publish the locally tested MCP authoring guidance and source examples.
+- Cover validation, generated IDs, compact reads, and canonical-source reuse.
+- Use separate asset upload and inventory tools with SVG examples.
+- Clarify action fields, retries, revisions, and publication workflows.
+- Make browser testing optional and require explicit user approval.
+
 ## 1.3.0 - 2026-09-01
 
 - Add OpenAI, Claude Code, Cursor, and portable Agent Plugin manifests.
