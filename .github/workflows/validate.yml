@@ -2,6 +2,8 @@ name: Validate
 
 on:
   pull_request:
+  release:
+    types: [published]
   push:
     branches: [main]
     tags: ["v*"]
@@ -24,3 +26,23 @@ jobs:
         run: python3 scripts/validate.py
       - name: Test skill installation
         run: node scripts/test-install.mjs
+
+  release-zip:
+    if: github.event_name == 'release'
+    needs: skill
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - name: Package skill folder
+        run: |
+          git archive --format=zip --output="$RUNNER_TEMP/modern-docs.zip" HEAD:skills modern-docs
+          unzip -t "$RUNNER_TEMP/modern-docs.zip"
+      - name: Attach skill ZIP to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$RELEASE_TAG" "$RUNNER_TEMP/modern-docs.zip"

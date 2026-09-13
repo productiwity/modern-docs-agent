@@ -21,6 +21,13 @@ Complete OAuth and approve `documents:read` and `documents:write`.
 
 The repository works with agents supported by the [skills CLI](https://www.skills.sh/docs), including Codex, Claude Code, Cursor, GitHub Copilot, and Gemini CLI.
 
+## Download without a terminal
+
+[Download the skill ZIP](https://github.com/productiwity/modern-docs-agent/releases/latest/download/modern-docs.zip).
+Upload it directly to Claude through Customize > Skills. For file-copy installs,
+extract it and copy the complete `modern-docs` folder into your client's skills folder.
+Connect the MCP server separately.
+
 ## Provider packages
 
 The same repository is ready for each provider. The canonical skill stays in `skills/modern-docs`; provider manifests only describe how that skill and the hosted MCP server are installed.
@@ -63,6 +70,10 @@ Releases use semantic versioning. `VERSION`, the skill metadata, `contracts.json
 - Major: incompatible skill behavior or MCP tool contract
 
 See [CHANGELOG.md](CHANGELOG.md) for release notes.
+
+Publishing a GitHub release runs validation and attaches `modern-docs.zip` from
+that release's tag. The ZIP contains only the skill folder and its supporting files.
+Wait for the Validate workflow to finish before announcing the download.
 
 ## Security
 
